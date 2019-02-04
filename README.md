@@ -11,6 +11,8 @@ Using reflection, we can invoke methods of an object.
 To invoke method using reflection, we have to:
 1. Get reference to the method: https://github.com/mtumilowicz/java11-reflection-methods
 1. Use the `public Object invoke(Object obj, Object... args)` of the `Method` class:
+    * `obj` the object the underlying method is invoked from
+    * `args` the arguments used for the method call
     * exceptions:
         * `IllegalAccessException` - if the underlying
           method is inaccessible (enforcing Java language 
@@ -31,3 +33,29 @@ To invoke method using reflection, we have to:
           and the method is an instance method.
         * `ExceptionInInitializerError` if the initialization
           provoked by this method fails.
+          
+# project description
+We will show how to invoke method using reflection.
+```
+class X {
+    String concat(String string, int i) {
+        return string + i;
+    }
+}
+```
+and invocation:
+```
+var concatenated = (String) X.class.getDeclaredMethod("concat", String.class, int.class)
+        .invoke(new X(),"a", 1);
+
+assertThat(concatenated, is("a1"));
+```
+**pay attention to parameters:**
+```
+@Test(expected = IllegalArgumentException.class)
+public void invoke_wrongArguments() throws NoSuchMethodException,
+        IllegalAccessException,
+        InvocationTargetException {
+    X.class.getDeclaredMethod("concat", String.class, int.class).invoke("a", "b");
+}
+```
