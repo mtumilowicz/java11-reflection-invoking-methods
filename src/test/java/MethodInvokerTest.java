@@ -20,6 +20,6 @@ public class MethodInvokerTest {
     public void invoke_wrongArguments() throws NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        X.class.getDeclaredMethod("concat", String.class, int.class).invoke("a", "a", "b");
+        X.class.getDeclaredMethod("concat", String.class, int.class).invoke("a", "b");
     }
 }
