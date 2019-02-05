@@ -35,7 +35,7 @@ To invoke method using reflection, we have to:
           and the method is an instance method.
         * `ExceptionInInitializerError` if the initialization
           provoked by this method fails.
-    * **we can invoke only that methods that we can call 
+    * **we can invoke only that methods which we can call 
     with regular java code (otherwise `IllegalAccessException`), 
     we can bypass it using**: https://github.com/mtumilowicz/java11-deep-reflection
 # project description
