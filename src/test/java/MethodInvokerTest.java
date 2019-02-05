@@ -22,4 +22,11 @@ public class MethodInvokerTest {
             InvocationTargetException {
         X.class.getDeclaredMethod("concat", String.class, int.class).invoke("a", "b");
     }
+
+    @Test(expected = IllegalAccessException.class)
+    public void invoke_private() throws NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
+        X.class.getDeclaredMethod("privateMethod").invoke(new X());
+    }
 }
