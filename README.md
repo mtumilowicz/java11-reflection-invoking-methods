@@ -45,6 +45,10 @@ class X {
     String concat(String string, int i) {
         return string + i;
     }
+
+    private void privateMethod() {
+        
+    }
 }
 ```
 and invocation:
