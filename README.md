@@ -35,7 +35,9 @@ To invoke method using reflection, we have to:
           and the method is an instance method.
         * `ExceptionInInitializerError` if the initialization
           provoked by this method fails.
-          
+    * **we can invoke only that methods that we can call 
+    with regular java code (`IllegalAccessException`), 
+    we can bypass it using**: https://github.com/mtumilowicz/java11-deep-reflection
 # project description
 We will show how to invoke method using reflection.
 ```
@@ -59,5 +61,14 @@ public void invoke_wrongArguments() throws NoSuchMethodException,
         IllegalAccessException,
         InvocationTargetException {
     X.class.getDeclaredMethod("concat", String.class, int.class).invoke("a", "b");
+}
+```
+**pay attention to accessibility:**
+```
+@Test(expected = IllegalAccessException.class)
+public void invoke_private() throws NoSuchMethodException,
+        IllegalAccessException,
+        InvocationTargetException {
+    X.class.getDeclaredMethod("privateMethod").invoke(new X());
 }
 ```
